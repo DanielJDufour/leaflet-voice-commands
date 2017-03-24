@@ -1,0 +1,40 @@
+{
+  "name": "leaflet-voice-commands",
+  "version": "0.0.1",
+  "description": "Detects voice commands for map applications",
+  "main": "leaflet-voice-commands.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/danieljdufour/leaflet-voice-commands.git"
+  },
+  "scripts": {
+    "min": "uglifyjs leaflet-voice-commands.js -mc -o leaflet-voice-commands.min.js"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/danieljdufour/leaflet-voice-commands/issues"
+  },
+  "files": [
+    "leaflet-voice-commands.js",
+    "leaflet-voice-commands.min.js",
+    "README.md"
+  ],
+  "devDependencies": {
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-cli": "^1.2.2",
+    "gulp-concat": "^2.6.1",
+    "uglifyjs": "^2.4.10"
+  },
+  "peerDependencies": {
+    "leaflet": "^1.0.0"
+  },
+  "autoupdate": {
+    "source": "git",
+    "target": "git://github.com/danieljdufour/leaflet-voice-commands.git",
+    "basePath": "/",
+    "files": [
+      "leaflet-voice-commands.js"
+    ]
+  }
+}
