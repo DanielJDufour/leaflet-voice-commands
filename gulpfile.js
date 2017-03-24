@@ -1,17 +1,25 @@
 var gulp = require("gulp");
 var concat = require("gulp-concat");
 var del = require('del');
-
+var fs = require("fs");
+var insertLines = require('gulp-insert-lines');
 
 var paths = {
     scripts: ['src/*'],
 };
 
+
 gulp.task("build", ["clean"], function() {
     console.log("starting build");
-    return gulp.src(["./src/homonyms.json", "./src/leaflet-voice-commands.js"])
+
+    var homonyms = "\n    //https://github.com/DanielJDufour/homonyms.git\n    var homonyms = " + fs.readFileSync("./src/homonyms.json", "utf8") + ";\n";
+    return gulp.src(["./src/leaflet-voice-commands.js"])
+    .pipe(insertLines({
+        "after": /'use strict';/i,
+        "lineAfter": homonyms
+    }))
     .pipe(concat("leaflet-voice-commands.js"))
-    .pipe(gulp.dest("/build"));
+    .pipe(gulp.dest("build"));
 });
 
 // Not all tasks need to use streams

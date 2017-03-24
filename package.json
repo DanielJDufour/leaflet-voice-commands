@@ -24,6 +24,7 @@
     "gulp": "^3.9.1",
     "gulp-cli": "^1.2.2",
     "gulp-concat": "^2.6.1",
+    "gulp-insert-lines": "0.0.4",
     "uglifyjs": "^2.4.10"
   },
   "peerDependencies": {
