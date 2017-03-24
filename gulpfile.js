@@ -14,10 +14,14 @@ gulp.task("build", ["clean"], function() {
 
     var homonyms = "\n    //https://github.com/DanielJDufour/homonyms.git\n    var homonyms = " + fs.readFileSync("./src/homonyms.json", "utf8") + ";\n";
     return gulp.src(["./src/leaflet-voice-commands.js"])
+
+    // insert the homonyms inside the closure formed by the module
+    // so we don't pollute the global scope
     .pipe(insertLines({
         "after": /'use strict';/i,
         "lineAfter": homonyms
     }))
+
     .pipe(concat("leaflet-voice-commands.js"))
     .pipe(gulp.dest("build"));
 });

@@ -15,25 +15,21 @@
 
     var commands = [];
 
-    var re_in = "(?:an|en|in|on|un)";
-    var re_out = "(?:at|oat|oot|out|ount)";
-    var re_zoom = "(?:cinnam|dom|doom|germ|jim|sum|soon|sune|superm|xoom|zimmerm|zoom|zum|zume)";
+    var re = {};
+    for (let phrase in homonyms) {
+        re[phrase] = "(?:" + homonyms[phrase].join("|") + ")";
+    }
 
-    var zoom_in = new RegExp(".*" + re_zoom + " ?" + re_in + ".*", "i");
-    var zoom_out = new RegExp(".*" + re_zoom + " ?" + re_out + ".*", "i");
 
-    var basemap = "(?:base[ -]?map)s?";
-    var change = "(?:change)";
-    var close = "(?:clothes|close)";
-    var _switch = "(?:switch)";
-    var exit = "(?:accent|exit)";
-    var go = "(?:go)";
-    var view = "(?:view)";
-    var fullscreen = "(?:(?:full|pool)[ -]?screen)";
+    re.zoom_in = new RegExp(".*" + re.zoom + " ?" + re.in + ".*", "i");
+    re.zoom_out = new RegExp(".*" + re.zoom + " ?" + re.out + ".*", "i");
 
-    var go_fullscreen = new RegExp(".*" + "(?:" + go + "|" + view + ")" + " ?" + fullscreen + ".*", "i");
-    var exit_fullscreen = new RegExp(".*" + "(?:" + exit + ")" + " ?" + fullscreen + ".*", "i");
-    var switch_basemap = new RegExp(".*" + "(?:" + _switch + "|" + change + ")" + " ?" + basemap + ".*", "i");
+    re.basemap = "(?:" + re.base + "[ -]?" + re.map + ")s?";
+    re.fullscreen = "(?:" + re.full + "[ -]?" + re.screen + ")";
+
+    re.go_full_screen = new RegExp(".*" + "(?:" + re.go + "|" + re.view + ")" + " ?" + re.fullscreen + ".*", "i");
+    re.exit_fullscreen = new RegExp(".*" + "(?:" + re.exit + ")" + " ?" + re.fullscreen + ".*", "i");
+    re.switch_basemap = new RegExp(".*" + "(?:" + re.switch + "|" + re.change + ")" + " ?" + re.basemap + ".*", "i");
 
 
     L.Voice = {
@@ -45,7 +41,7 @@
 
         commands: {
             zoom_in: {
-                pattern: zoom_in,
+                pattern: re.zoom_in,
                 action: function() {
                     L.Voice.maps.forEach(function(map) {
                         map.zoomIn();
@@ -53,7 +49,7 @@
                 }
             },
             zoom_out: {
-                pattern: zoom_out,
+                pattern: re.zoom_out,
                 action: function() {
                     L.Voice.maps.forEach(function(map) {
                         map.zoomOut();
@@ -61,7 +57,7 @@
                 }
             },
             exit_fullscreen: {
-                pattern: exit_fullscreen,
+                pattern: re.exit_fullscreen,
                 action: function() {
                     var map = L.Voice.maps[0];
                     if (map.isFullscreen && map.isFullscreen()) {
@@ -70,7 +66,7 @@
                 }
             },
             switch_basemap: {
-                pattern: switch_basemap,
+                pattern: re.switch_basemap,
                 action: function() {
                     console.log("switching basemap");
                 }
