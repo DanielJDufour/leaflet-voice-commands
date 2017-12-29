@@ -1,4 +1,6 @@
 # leaflet-voice-commands
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/DanielJDufour/leaflet-voice-commands.svg)](https://greenkeeper.io/)
 Tell Your Leaflet Map What to Do, like Zoom, Exit Full Screen, and Change Basemap
 
 
