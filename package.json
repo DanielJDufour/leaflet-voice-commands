@@ -20,9 +20,9 @@
     "README.md"
   ],
   "devDependencies": {
-    "del": "^2.2.2",
+    "del": "^3.0.0",
     "gulp": "^3.9.1",
-    "gulp-cli": "^1.2.2",
+    "gulp-cli": "^2.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-insert-lines": "0.0.4",
     "uglifyjs": "^2.4.10"
